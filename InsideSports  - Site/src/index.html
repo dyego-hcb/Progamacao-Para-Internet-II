@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="shortcut icon" href="../icone/favicon.ico">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <title>Inside Sports</title>
+    </head>
+    <body>
+        <a class="whatsapp-link" href="https://api.whatsapp.com/send?phone=556299920-8912&text=Olá,%20gostaria%20de%20ficar%20por%20dentro%20das%20ofertas!" target="_blank">
+            <i class="fa fa-whatsapp"></i>
+        </a>
+        <div class="d-flex flex-column wrapper">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom shadow-sm mb-3">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">
+                        <img
+                            src="../img/INSIDE_SPORTS_LOGO_VETORIZADO.png"
+                            width="40"
+                            height="40"
+                            class="d-inline-block align-items-center"
+                            alt=""
+                        >
+                        <b>Inside Sports</b>
+                    </a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target=".navbar-collapse"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="contact.html">Contato</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="navbarDropdownMenuLink"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    Produtos
+                                </a>
+                                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-white" href="vestuarioMasculino.html">Roupas Masculinas</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-white" href="vestuarioFeminino.html">Roupas Femininas</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-white" href="tenisMasculinos.html">Tenis Masculino</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-white" href="tenisFeminino.html">Tenis Feminino</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="align-self-end">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a href="cadastrarUsuario.html" class="nav-link text-white">Cadastrar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="login.html" class="nav-link text-white">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <span class="badge rounded-pill bg-light text-dark position-absolute ms-4 mt-0" titel="0 Produtos no Carrinho">
+                                        <small>0</small>
+                                    </span>
+                                    <a href="cart.html" class="nav-link text-white">
+                                        <i class="bi-cart" style="font-size:24px; line-height: 24px;"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="container">
+                    <div id="carouselPrincipal" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button
+                                type="button"
+                                data-bs-target="#carouselPrincipal"
+                                data-bs-slide-to="0"
+                                class="active"
+                            ></button>
+                            <button type="button" data-bs-target="#carouselPrincipal" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#carouselPrincipal" data-bs-slide-to="2"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-bs-interval="3000">
+                                <img src="../img/IMAGENS INSIDE/Carrocel e promocoes/iNSIDE CARROCEL.jpg" class="d-none d-md-block w-100" alt="...">
+                                <img src="../img/IMAGENS INSIDE/Carrocel e promocoes/iNSIDE CARROCEL.jpg" class="d-block d-md-none w-100" alt="...">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="3000">
+                                <img src="../img/IMAGENS INSIDE/Carrocel e promocoes/1d256c84-1ec0-469b-8086-9d6f2cd8a339.jpg" class="d-none d-md-block w-100" alt="...">
+                                <img src="../img/IMAGENS INSIDE/Carrocel e promocoes/1d256c84-1ec0-469b-8086-9d6f2cd8a339.jpg" class="d-block d-md-none w-100" alt="...">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="3000">
+                                <img src="../img/IMAGENS INSIDE/Carrocel e promocoes/iNSIDE CARROCEL.jpg" class="d-none d-md-block w-100" alt="...">
+                                <img src="../img/IMAGENS INSIDE/Carrocel e promocoes/iNSIDE CARROCEL.jpg" class="d-block d-md-none w-100" alt="...">
+                            </div>
+                        </div>
+                        <button
+                            class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carouselPrincipal"
+                            data-bs-slide="prev"
+                        >
+                            <span class="carousel-control-prev-icon"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                            class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carouselPrincipal"
+                            data-bs-slide="next"
+                        >
+                            <span class="carousel-control-next-icon"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <hr class="mt-3">
+                </div>
+                <main class="flex-fill">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <form class="justify-content-center justify-content-md-start mb-3 mb-md-0">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control me-2" placeholder="Digite aqui o que voce procura">
+                                        <button class="btn btn-Amarelo">Buscar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <hr class="mt-3">
+                        <div class="row g-3">
+                            <h6>Produtos Masculinos</h6>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img
+                                        src="../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg"
+                                        id="imgHover"
+                                        class="card-img-top"
+                                        alt="..."
+                                        onmouseout="trocaImgOut()"
+                                        onmouseenter="trocaImgEnter()"
+                                    >
+                                    <div class="card-header">
+                                        R$ 160,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Chuteira Addidas</h5>
+                                        <p class="card-text truncar-3l">Chuteira addias de campo, verde, travas de borracha para campo molhado, chuteira com material fino, fica justo no pe.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">32 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Roupa cademia masculina/Camiseta academia masculina 1.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 55,50
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Camiseta Dry Fit Addidas Masculina</h5>
+                                        <p class="card-text truncar-3l">Camiseta dry-fit addidas, um material exelente, fresco, otimo para usar no dia a dia, na academia, cross-fit, etc.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-light disabled mt-2 d-block">Produto Indisponivel</a>
+                                        <small class="text-danger">Produto Esgotado</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart-fill" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Tenis academia masculino/Tenis academia masculino 1.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 200,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Tenis Addias Masculino</h5>
+                                        <p class="card-text truncar-3l">Tenis addidas, otimo para caminhada, academia, bom para o uso no dia a dia.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">64 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Tenis academia masculino/Tenis academia masculino 2.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 189,50
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Tenis Addidas Masculino</h5>
+                                        <p class="card-text truncar-3l">Tenis addias fit, otimo para academia, caminhadas, basquete, otimo para o seu dia a dia.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">32 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 2.jpg " class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 260,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Chuteira Addidas</h5>
+                                        <p class="card-text truncar-3l">Chuteira addidas de campo, otima para campos com grama alta, sintetica, essa chuteira tem travas emborrachadas, otimas para campo molhado e secas.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">100 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Camiseta time/Camise time PSG.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 250,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Camisa Paris Saint German</h5>
+                                        <p class="card-text truncar-3l">Camisa do paris saint german 2021-HOME s/ numero, com patrocinio, camisa oficial.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">97 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mt-3">
+                            <br>
+                        </div>
+                        <div class="row g-3">
+                            <h6>Produtos Femininos</h6>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Chuteira feminina/Chuteira feminina 1.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 160,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Chuteira Addidas</h5>
+                                        <p class="card-text truncar-3l">Chuteira addidas na cor rosa, para campos society, tem uma boa pegada no pe, chuteira prorpia para campos society e campos de grama.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">90 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Roupa cademia feminina/Camiseta academia feminina  2.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 30,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Camisa Feminina</h5>
+                                        <p class="card-text truncar-3l">Camisa Feminina dry-fit, nas cores azul com branco, otima para exercicios no dia a dia</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">22 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Tenis academia feminino/Tenis academia feminino  2.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 120,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Tenis de Corrida</h5>
+                                        <p class="card-text truncar-3l">Tenis para academia feminino, nas cores cinza e azul, otimo para atividades fisicas como caminhada, academia, cross-fit, usar no dia a dia.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">200 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Roupa cademia feminina/Camiseta academia feminina 1 .jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 80,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Camisa Dry-Fit Feminina</h5>
+                                        <p class="card-text truncar-3l">Camisa dry-fit, otima para usar em atividades fisicas, no dia a dia, em qualquer ocasia, na cor rosa.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">28 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Roupa cademia feminina/Camiseta academia feminina  4.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 70,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Camisa Dry-fit Feminina</h5>
+                                        <p class="card-text truncar-3l">Camisa feminina dry-fit nas cores cinza e azul, otima para o dia a dia, academias etc.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">15 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Tenis academia feminino/Tenis academia feminino 1 .jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 250,50
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Tenis Mizunno Feminino</h5>
+                                        <p class="card-text truncar-3l">Tenis mizzuno femnino nas cores preto com cinza e rosa, onde esse tenis e otimo para atividades no dia a dia e para realizar ativiadades fisicas como academia, cros-fit, caminhada, etc.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">39 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mt-3">
+                            <br>
+                        </div>
+                        <div class="row g-3">
+                            <h6>Tenis</h6>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Tenis academia masculino/Tenis academia masculino 7.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 270,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Tenis Nike</h5>
+                                        <p class="card-text truncar-3l">Tenis nike para o dia a dia, academia, cross-fit caminhada, otimo tenis material resistente.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">10 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Tenis academia feminino/Tenis academia feminino  4.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 190,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Tenis Feminino</h5>
+                                        <p class="card-text truncar-3l">Tenis feminino nas cores azul e rosa, otimo para caminhadas, academia, cross-fit, exelente material</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">22 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Tenis academia masculino/Tenis academia masculino 5.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 290,00
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Tenis Nike</h5>
+                                        <p class="card-text truncar-3l">Tenis nike para academia, otimo para academia, basquete, cross-fit, material exelente e duradouro.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">130 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Tenis academia feminino/Tenis academia feminino  3.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 180,50
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Tenis Feminino</h5>
+                                        <p class="card-text truncar-3l">Tenis feminino rosa, otimo para academia, cross-fit, material otimo.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">32 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <img src="../img/IMAGENS INSIDE/Tenis academia masculino/Tenis academia masculino 4.jpg" class="card-img-top" alt="...">
+                                    <div class="card-header">
+                                        R$ 4,50
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Tenis Addidas</h5>
+                                        <p class="card-text truncar-3l">Tenis addidas branco com vermelho, otimo tenis para caminhada, esse tenis possui um material exelente e duradouro.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">100 unidades em esotque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <div class="card text-center bg-light">
+                                    <a href="#" class="position-absolute end-0 p-2 text-Amarelo">
+                                        <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                                    </a>
+                                    <a href="produtoDetalhado.html">
+                                        <img src="../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 4.jpg" class="card-img-top" alt="...">
+                                    </a>
+                                    <div class="card-header">
+                                        R$ 234,50
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Chuteira Nike</h5>
+                                        <p class="card-text truncar-3l">Chuteira nike na cor verde, essa chuteira e prorpia para jogar no campo, chuteira com um material exlente.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="cart.html" class="btn btn-Amarelo mt-2 d-block">Adicionar ao Carrinho</a>
+                                        <small class="text-success">80 unidades em estoque</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mt-3">
+                            <br>
+                        </div>
+                    </div>
+                </main>
+                <footer class="border-top text-muted">
+                    <div class="bg-dark">
+                        <div class="container">
+                            <h6 class="text-Amarelo text-center pt-2">Formas de Pagamento</h6>
+                            <div class="row py-4 d-flex aling-items-center">
+                                <div class="col-md-12 text-center">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-american-express.svg" class="mr-4" width="50px">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-amex.svg" class="mr-4" width="50px">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-aura.svg" class="mr-4" width="50px">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-banco-brasil.svg" class="mr-4" width="50px">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-banco-do-brasil.svg" class="mr-4" width="50px">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-bndes-1.svg" class="mr-4" width="50px">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-bndes.svg" class="mr-4" width="50px">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-boleto.svg" class="mr-4" width="50px">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-bradesco.svg" class="mr-4" width="50px">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-caixa-economica-federal.svg" class="mr-4" width="50px">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-caixa-economica.svg" class="mr-4" width="50px">
+                                    <img src="../img/IMAGENS INSIDE/Formas de pagamento/fc-cielo.svg" class="mr-4" width="50px">
+                                    <hr class="text-Amarelo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row py-3">
+                            <div class="col-12 col-md-4 text-center">
+                                &copy; 2022 - Inside Sports Ltda ME
+                                <br>
+                                Rua Olegario Maciel, 221, Patos de Minas - MG
+                                <br>
+                                CNPJ 12.345.678/0001-21
+                            </div>
+                            <div class="col-12 col-md-4 text-center">
+                                <a href="politicasPrivacidade.html" class="text-decoration-none text-dark">Politicas de Privacidade</a>
+                                <br>
+                                <a href="termosUso.html" class="text-decoration-none text-dark">Termos de Uso</a>
+                                <br>
+                                <a href="aboutInsideSports.html" class="text-decoration-none text-dark">Quem Somos</a>
+                                <br>
+                                <a href="trocasDevloucoes.html" class="text-decoration-none text-dark">Trocas e Devolucoes</a>
+                            </div>
+                            <div class="col-12 col-md-4 text-center">
+                                <a href="contact.html" class="text-decoration-none text-dark">Contato pelo Site</a>
+                                <br>
+                                Email:
+                                <a href="mailto:insideSports@gmail.com" class="text-decoration-none text-dark">insidesportsoficial@gmail.com</a>
+                                <br>
+                                Telefone:
+                                <a href="phone:34999208912" class="text-decoration-none text-dark">(34) 9 9920-8912</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+            <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="../javascript/index.js" charset="utf-8"></script>
+            <script src="../javascript/jqueryIndex.js" charset="utf-8"></script>
+        </body>
+    </html>
