@@ -1,8 +1,39 @@
 <?php
-    include('config.php');
-    Mysql::connectar();
-?>
+    session_start();
+    include_once('config.php');
+    // print_r($_SESSION);
+    if((!isset($_SESSION['fieldEmail']) == true) and (!isset($_SESSION['fieldSenha']) == true))
+    {
+        unset($_SESSION['fieldEmail']);
+        unset($_SESSION['fieldSenha']);
+        header('Location: loginUsuario.php');
+    }
+    
+    $sql = "SELECT nome FROM usuarios WHERE email = '$_SESSION[fieldEmail]'";
+    $result = $conexao->query($sql);
+    $user_data = mysqli_fetch_assoc($result);
+    $logado = $user_data['nome'];
+    
+    if(isset($_POST['submit']))
+    {
+        $sql = "SELECT idusuarios FROM usuarios WHERE email = '$_SESSION[fieldEmail]'";
+        $result = $conexao->query($sql);
+        $user_data = mysqli_fetch_assoc($result);
 
+        $cep = $_POST['fieldCep'];
+        $rua = $_POST['fieldRua'];
+        $bairro = $_POST['fieldBairro'];
+        $cidade = $_POST['fieldCidadde'];
+        $numero = $_POST['fieldNumeroCasa'];
+        $complemento = $_POST['fieldComplemento'];
+        $observacao = $_POST['fieldObservacao'];
+        $id_user_endereco = $user_data['idusuarios'];
+
+        $result = mysqli_query($conexao, "INSERT INTO endereco (CEP, rua, bairro, cidade, numero, complemento, observacao, id_user_endereco)
+        VALUES ('$cep','$rua','$bairro','$cidade','$numero','$complemento', '$observacao', '$id_user_endereco')");
+        header('Location: areaCliente.php');
+    }
+?>
 <!doctype html>
 <html lang="pt-br">
     <head>
@@ -12,13 +43,13 @@
         <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
         <link rel="stylesheet" href="../css/styles.css">
         <link rel="shortcut icon" href="../icone/favicon.ico">
-        <title>Inside Sports</title>
+        <title>Inside Sports : Dados do Cliente Endereco</title>
     </head>
     <body>
         <div class="d-flex flex-column wrapper">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom shadow-sm mb-3">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="home.php">
                         <img
                             src="../img/INSIDE_SPORTS_LOGO_VETORIZADO.png"
                             width="40"
@@ -39,10 +70,10 @@
                     <div class="collapse navbar-collapse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="index.html">Home</a>
+                                <a class="nav-link text-white" href="home.php">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="contact.html">Contato</a>
+                                <a class="nav-link text-white" href="contact.php">Contato</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a
@@ -56,29 +87,31 @@
                                     Produtos
                                 </a>
                                 <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-white" href="vestuarioMasculino.html">Roupas Masculinas</a>
+                                    <a class="dropdown-item text-white" href="vestuarioMasculino.php">Roupas Masculinas</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-white" href="vestuarioFeminino.html">Roupas Femininas</a>
+                                    <a class="dropdown-item text-white" href="vestuarioFeminino.php">Roupas Femininas</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-white" href="tenisMasculinos.html">Tenis Masculino</a>
+                                    <a class="dropdown-item text-white" href="tenisMasculinos.php">Tenis Masculino</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-white" href="tenisFeminino.html">Tenis Feminino</a>
+                                    <a class="dropdown-item text-white" href="tenisFeminino.php">Tenis Feminino</a>
                                 </div>
                             </li>
                         </ul>
                         <div class="align-self-end">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="cadastrarUsuario.php" class="nav-link text-white">Cadastrar</a>
+                                <?php
+                                        echo "<a class='nav-link text-white' href='areaCliente.php'>Logado como <b>$logado</b></a>";
+                                ?>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="loginUsuario.php" class="nav-link text-white">Login</a>
+                                    <a class="nav-link text-white" href="deslogarConta.php">Sair</a>
                                 </li>
                                 <li class="nav-item">
                                     <span class="badge rounded-pill bg-light text-dark position-absolute ms-4 mt-0" titel="0 Produtos no Carrinho">
                                         <small>0</small>
                                     </span>
-                                    <a href="cart.html" class="nav-link text-white">
+                                    <a href="cart.php" class="nav-link text-white">
                                         <i class="bi-cart" style="font-size:24px; line-height: 24px;"></i>
                                     </a>
                                 </li>
@@ -88,57 +121,45 @@
                 </nav>
                 <main class="flex-fill">
                     <div class="container">
-                        <h1>Informe seus dados, por favor</h1>
-                        <hr>
-                        <form method="POST" action="../php/cadastroUsuario.php" class="mt-3">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6">
-                                    <fieldset class="row gx-3">
-                                        <legend>Dados Pessoais</legend>
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" type="text" id="txtNome" name="fieldNome" placeholder=" " autofocus />
-                                            <label for="txtNome">Nome</label>
-                                        </div>
-                                        <div class="form-floating mb-3 col-md-6 col-xl-4">
-                                            <input class="form-control" type="text" id="txtCPF" name="fieldCpf" placeholder=" " />
-                                            <label for="txtCPF">CPF</label>
-                                        </div>
-                                        <div class="form-floating mb-3 col-md-6 col-xl-4">
-                                            <input class="form-control" type="date" id="txtDataNascimento" name="fieldNascimento" placeholder=" " />
-                                            <label for="txtDataNascimento" class="d-inline d-sm-none d-md-inline d-lg-none">Data
-                                                Nascimento</label>
-                                            <label for="txtDataNascimento" class="d-none d-sm-inline d-md-none d-lg-inline">Data
-                                                de Nascimento</label>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <legend>Contatos</legend>
-                                        <div class="form-floating mb-3 col-md-8">
-                                            <input class="form-control" type="email" id="txtEmail" name="fieldEmail" placeholder=" " />
-                                            <label for="txtEmail">E-mail</label>
-                                        </div>
-                                        <div class="form-floating mb-3 col-md-6">
-                                            <input class="form-control" placeholder=" " type="text" name="fieldTell" id="txtTelefone" />
-                                            <label for="txtTelefone">Telefone</label>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset class="row gx-3">
-                                        <legend>Senha de Acesso</legend>
-                                        <div class="form-floating mb-3 col-lg-6">
-                                            <input class="form-control" type="password" id="txtSenha" name="fieldSenha" placeholder=" " />
-                                            <label for="txtSenha">Senha</label>
-                                        </div>
-                                        <div class="form-floating mb-3 col-lg-6">
-                                            <input class="form-control" type="password" id="txtConfirmacaoSenha" placeholder=" " />
-                                            <label class="form-label" for="txtConfirmacaoSenha">Confirmação da Senha</label>
-                                        </div>
-                                    </fieldset>
+                        <h1>Minha Conta</h1>
+                        <div class="row gx-3">
+                            <div class="col-4">
+                                <div class="list-group">
+                                    <a href="areaCliente.php" class="list-group-item list-group-item-action">
+                                        <i class="bi bi-emoji-smile fs-6"></i> Boas Vindas
+                                    </a>
+                                    <a href="dadosClientes.php" class="list-group-item list-group-item-action">
+                                        <i class="bi-person fs-6"></i> Dados Pessoais
+                                    </a>
+                                    <a href="clienteContato.php" class="list-group-item list-group-item-action">
+                                        <i class="bi-mailbox fs-6"></i> Contato
+                                    </a>
+                                    <a href="clienteEndereco.php" class="list-group-item list-group-item-action bg-Amarelo text-light">
+                                        <i class="bi-house-door fs-6"></i> Endereco
+                                    </a>
+                                    <a href="clientePedidos.php" class="list-group-item list-group-item-action">
+                                        <i class="bi-truck fs-6"></i> Pedidos
+                                    </a>
+                                    <a href="clienteFavoritos.php" class="list-group-item list-group-item-action">
+                                        <i class="bi-heart fs-6"></i> Favoritos
+                                    </a>
+                                    <a href="clienteAlterarSenha.php" class="list-group-item list-group-item-actiont">
+                                        <i class="bi-lock fs-6"></i> Alterar Senha
+                                    </a>
+                                    <a href="deslogarConta.php" class="list-group-item list-group-item-action">
+                                        <i class="bi-door-open fs-6"></i> Sair
+                                    </a>
                                 </div>
-                                <div class="col-sm-12 col-md-6">
+                            </div>
+                            <div class="col-8">
+                                <div class="container">
+                                    <h3 class>Cadastrar Endereco</h3>
+                                </div>
+                                <form action="clienteEndereco.php" method="POST">
                                     <fieldset class="row gx-3">
                                         <legend>Endereço</legend>
                                         <div class="form-floating mb-3 col-md-6 col-lg-4">
-                                            <input class="form-control" type="text" id="txtCEP" placeholder=" " />
+                                            <input class="form-control" type="text" id="fieldCep" name="fieldCep" placeholder=" " required/>
                                             <label for="txtCEP">CEP</label>
                                         </div>
                                         <div class="mb-3 col-md-6 col-lg-8 align-self-end">
@@ -147,46 +168,38 @@
                                                 disabled>Digite o CEP para buscarmos o endereço.</textarea>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" type="text" id="txtRua" placeholder=" " />
+                                            <input class="form-control" type="text" id="fieldRua" name="fieldRua" placeholder=" " required/>
                                             <label for="txtReferencia">Rua</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" type="text" id="txtBairro" placeholder=" " />
+                                            <input class="form-control" type="text" id="fieldBairro" name="fieldBairro" placeholder=" " required/>
                                             <label for="txtReferencia">Bairo</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" type="text" id="txtCidade" placeholder=" " />
+                                            <input class="form-control" type="text" id="fieldCidadde" name="fieldCidadde" placeholder=" " required/>
                                             <label for="txtReferencia">Cidade</label>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="form-floating mb-3 col-md-4">
-                                            <input class="form-control" type="text" id="txtNumero" placeholder=" " />
+                                            <input class="form-control" type="text" id="fieldNumeroCasa" name="fieldNumeroCasa" placeholder=" " required/>
                                             <label for="txtNumero">Número</label>
                                         </div>
                                         <div class="form-floating mb-3 col-md-8">
-                                            <input class="form-control" type="text" id="txtComplemento" placeholder=" " />
+                                            <input class="form-control" type="text" id="fieldComplemento" name="fieldComplemento" placeholder=" " required/>
                                             <label for="txtComplemento">Complemento</label>
                                         </div>
                                         <div class="form-floating mb-3 mt-3">
-                                            <input class="form-control" type="text" id="txtObsevacao" placeholder=" " />
+                                            <input class="form-control" type="text" id="fieldObservacao" name="fieldObservacao" placeholder=" " required/>
                                             <label for="txtReferencia">Observacao Ex: Deixar com a vizinha ao lado</label>
                                         </div>
                                     </fieldset>
-                                </div>
+                                    <div class="form-floating mb-3 col-md-8">
+                                        <input type="submit" name="submit" id="submit" class="btn btn-lg btn-Amarelo" value="Cadastrar Novo Endereco"/>
+                                        <a class="btn btn-lg btn-outline-danger" href="clienteEndereco.php">Voltar</a>
+                                    </div>       
+                                </form>
                             </div>
-                            <hr />
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Desejo receber informações sobre promoções.
-                                </label>
-                            </div>
-                            <div class="mb-3 text-left">
-                                <a class="btn btn-lg btn-light btn-outline-danger" href="/">Cancelar</a>
-                                <input type="button" class="btn btn-lg btn-Amarelo" value="Cadastrar"
-                                    onclick="window.location.href='confirmaCadastro.html'"/>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </main>
                 <footer class="border-top text-muted">
@@ -222,16 +235,16 @@
                                 CNPJ 12.345.678/0001-21
                             </div>
                             <div class="col-12 col-md-4 text-center">
-                                <a href="politicasPrivacidade.html" class="text-decoration-none text-dark">Politicas de Privacidade</a>
+                                <a href="politicasPrivacidade.php" class="text-decoration-none text-dark">Politicas de Privacidade</a>
                                 <br>
-                                <a href="termosUso.html" class="text-decoration-none text-dark">Termos de Uso</a>
+                                <a href="termosUso.php" class="text-decoration-none text-dark">Termos de Uso</a>
                                 <br>
-                                <a href="aboutInsideSports.html" class="text-decoration-none text-dark">Quem Somos</a>
+                                <a href="aboutInsideSports.php" class="text-decoration-none text-dark">Quem Somos</a>
                                 <br>
-                                <a href="trocasDevloucoes.html" class="text-decoration-none text-dark">Trocas e Devolucoes</a>
+                                <a href="trocasDevloucoes.php" class="text-decoration-none text-dark">Trocas e Devolucoes</a>
                             </div>
                             <div class="col-12 col-md-4 text-center">
-                                <a href="contact.html" class="text-decoration-none text-dark">Contato pelo Site</a>
+                                <a href="contact.php" class="text-decoration-none text-dark">Contato pelo Site</a>
                                 <br>
                                 Email:
                                 <a href="mailto:insideSports@gmail.com" class="text-decoration-none text-dark">insidesportsoficial@gmail.com</a>

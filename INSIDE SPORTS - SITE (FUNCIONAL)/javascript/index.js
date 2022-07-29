@@ -3,16 +3,14 @@ function trocarImagem(el) {
   imgTroca.src = el.src;
 }
 
-function trocaImgOut() {
-  var imgTrocaHover = document.getElementById("imgHover");
-  imgTrocaHover.src =
-    "../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg";
+function trocaImgOut(idImage) {
+  var imgTrocaHover = document.getElementById(idImage);
+  imgTrocaHover.src = "../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg";
 }
 
-function trocaImgEnter() {
-  var imgTrocaHover = document.getElementById("imgHover");
-  imgTrocaHover.src =
-    "../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 4.jpg";
+function trocaImgEnter(idImage) {
+  var imgTrocaHover = document.getElementById(idImage);
+  imgTrocaHover.src = "../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 4.jpg";
 }
 
 var purecookieTitle = "Cookies.",

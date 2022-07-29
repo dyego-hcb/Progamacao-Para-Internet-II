@@ -13,7 +13,7 @@
         <div class="d-flex flex-column wrapper">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom shadow-sm mb-3">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="home.php">
                         <img
                             src="../img/INSIDE_SPORTS_LOGO_VETORIZADO.png"
                             width="40"
@@ -34,10 +34,10 @@
                     <div class="collapse navbar-collapse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="index.html">Home</a>
+                                <a class="nav-link text-white" href="home.php">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="contact.html">Contato</a>
+                                <a class="nav-link text-white" href="contact.php">Contato</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a
@@ -51,13 +51,13 @@
                                     Produtos
                                 </a>
                                 <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-white" href="vestuarioMasculino.html">Roupas Masculinas</a>
+                                    <a class="dropdown-item text-white" href="vestuarioMasculino.php">Roupas Masculinas</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-white" href="vestuarioFeminino.html">Roupas Femininas</a>
+                                    <a class="dropdown-item text-white" href="vestuarioFeminino.php">Roupas Femininas</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-white" href="tenisMasculinos.html">Tenis Masculino</a>
+                                    <a class="dropdown-item text-white" href="tenisMasculinos.php">Tenis Masculino</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-white" href="tenisFeminino.html">Tenis Feminino</a>
+                                    <a class="dropdown-item text-white" href="tenisFeminino.php">Tenis Feminino</a>
                                 </div>
                             </li>
                         </ul>
@@ -73,7 +73,7 @@
                                     <span class="badge rounded-pill bg-light text-dark position-absolute ms-4 mt-0" titel="0 Produtos no Carrinho">
                                         <small>0</small>
                                     </span>
-                                    <a href="cart.html" class="nav-link text-white">
+                                    <a href="cart.php" class="nav-link text-white">
                                         <i class="bi-cart" style="font-size:24px; line-height: 24px;"></i>
                                     </a>
                                 </li>
@@ -84,12 +84,13 @@
                 <main class="flex-fill">
                     <div class="container">
                         <div class="row justify-content-center">
-                            <form class="col-sm-10 col-md-8 col-lg-6">
+                            <form class="col-sm-10 col-md-8 col-lg-6" action="validarLogin.php" method="POST">
                                 <h1>Indentifique-se para entrar</h1>
                                 <div class="form-floating mb-3">
                                     <input
                                         type="email"
-                                        id="txtEmail"
+                                        id="fieldEmail"
+                                        name="fieldEmail"
                                         class="form-control"
                                         placeholder=" "
                                         autofocus
@@ -99,7 +100,8 @@
                                 <div class="form-floating mb-3">
                                     <input
                                         type="password"
-                                        id="txtPassword"
+                                        id="fieldSenha"
+                                        name="fieldSenha"
                                         class="form-control"
                                         placeholder=" "
                                         autofocus
@@ -115,7 +117,7 @@
                                     >
                                     <label for="checkLembrar" class="form-check-label">Lembrar Senha</label>
                                 </div>
-                                <button type="button" class="btn btn-lg btn-Amarelo" onclick="window.location.href='areaCliente.html'">Entrar</button>
+                                <input type="submit" name="submit" id="submit" class="btn btn-lg btn-Amarelo" value="Entrar"/>
                                 <p class="mt-3">
                                     Ainda nao e cadastrado ?
                                     <a href="cadastrarUsuario.php">Clique Aqui</a>
@@ -123,7 +125,7 @@
                                 </p>
                                 <p class="mt-3">
                                     Esqueceu sua senha ?
-                                    <a href="recuperarSenha.html">Clique Aqui</a>
+                                    <a href="recuperarSenha.php">Clique Aqui</a>
                                     para recupera-la.
                                 </p>
                                 </form>
@@ -163,16 +165,16 @@
                                     CNPJ 12.345.678/0001-21
                                 </div>
                                 <div class="col-12 col-md-4 text-center">
-                                    <a href="politicasPrivacidade.html" class="text-decoration-none text-dark">Politicas de Privacidade</a>
+                                    <a href="politicasPrivacidade.php" class="text-decoration-none text-dark">Politicas de Privacidade</a>
                                     <br>
-                                    <a href="termosUso.html" class="text-decoration-none text-dark">Termos de Uso</a>
+                                    <a href="termosUso.php" class="text-decoration-none text-dark">Termos de Uso</a>
                                     <br>
-                                    <a href="aboutInsideSports.html" class="text-decoration-none text-dark">Quem Somos</a>
+                                    <a href="aboutInsideSports.php" class="text-decoration-none text-dark">Quem Somos</a>
                                     <br>
-                                    <a href="trocasDevloucoes.html" class="text-decoration-none text-dark">Trocas e Devolucoes</a>
+                                    <a href="trocasDevloucoes.php" class="text-decoration-none text-dark">Trocas e Devolucoes</a>
                                 </div>
                                 <div class="col-12 col-md-4 text-center">
-                                    <a href="contact.html" class="text-decoration-none text-dark">Contato pelo Site</a>
+                                    <a href="contact.php" class="text-decoration-none text-dark">Contato pelo Site</a>
                                     <br>
                                     Email:
                                     <a href="mailto:insideSports@gmail.com" class="text-decoration-none text-dark">insidesportsoficial@gmail.com</a>
