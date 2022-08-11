@@ -4,11 +4,15 @@ function trocarImagem(el) {
 }
 
 function trocaImgOut(idImage) {
+  //alert(idImage);
+  console.log(idImage);
   var imgTrocaHover = document.getElementById(idImage);
   imgTrocaHover.src = "../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg";
 }
 
 function trocaImgEnter(idImage) {
+  //alert(idImage);
+  console.log(idImage);
   var imgTrocaHover = document.getElementById(idImage);
   imgTrocaHover.src = "../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 4.jpg";
 }

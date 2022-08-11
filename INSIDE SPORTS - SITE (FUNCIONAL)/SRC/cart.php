@@ -1,17 +1,47 @@
 <?php
-    session_start();
-    include_once('config.php');
-    // print_r($_SESSION);
-    if((!isset($_SESSION['fieldEmail']) == true) and (!isset($_SESSION['fieldSenha']) == true))
-    {
-        unset($_SESSION['fieldEmail']);
-        unset($_SESSION['fieldSenha']);
-        header('Location: loginUsuario.php');
+session_start();
+include_once 'config.php';
+// print_r($_SESSION);
+if (
+    !isset($_SESSION['fieldEmail']) == true and
+    !isset($_SESSION['fieldSenha']) == true
+) {
+    unset($_SESSION['fieldEmail']);
+    unset($_SESSION['fieldSenha']);
+    header('Location: loginUsuario.php');
+}
+$sql = "SELECT nome FROM usuarios WHERE email = '$_SESSION[fieldEmail]'";
+$result = $conexao->query($sql);
+$user_data = mysqli_fetch_assoc($result);
+$logado = $user_data['nome'];
+
+if (!empty($_GET['idProduto'])) {
+    $idProdutoCarrinho = $_GET['idProduto'];
+    // SE A SESSAO CARRINHO N TIVER SIDO CRIADA, A MESMA E CRIADA
+    if (!isset($_SESSION['carrinho_final'])) {
+        $_SESSION['carrinho_final'] = array(); //CRIA SESSAO PRA RECEBER UM VETOR POIS SERAO N PRODUTOS
+        $countProdutos = sizeof($_SESSION['carrinho_final']);
     }
-    $sql = "SELECT nome FROM usuarios WHERE email = '$_SESSION[fieldEmail]'";
-    $result = $conexao->query($sql);
-    $user_data = mysqli_fetch_assoc($result);
-    $logado = $user_data['nome'];
+    // SE A SESSAO TIVER SIDO CRIADA E O ID DO PRODUTO NAO TIVER SIDO PREENCHIDA
+    if (!isset($_SESSION['carrinho_final'][$idProdutoCarrinho])) {
+        //SERA ADICIONADO 1 PRODUTO AO CARRINHO
+        $_SESSION['carrinho_final'][$idProdutoCarrinho] = $idProdutoCarrinho;
+        $countProdutos = sizeof($_SESSION['carrinho_final']);
+    } else {
+    //SE TIVER SIDO PREENCHIDA ADICONA NOVO PROD
+        $_SESSION['carrinho_final'][$idProdutoCarrinho] += $idProdutoCarrinho;
+        $countProdutos = sizeof($_SESSION['carrinho_final']);
+    }
+
+    if($countProdutos == 0)
+    {
+        $valor_total = 0.00;
+    }
+    else
+    {
+        $valor_total = $countProdutos * 160;
+    }
+}
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -79,9 +109,7 @@
                         <div class="align-self-end">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <?php
-                                        echo "<a class='nav-link text-white' href='areaCliente.php'>Logado como <b>$logado</b></a>";
-                                    ?>
+                                    <?php echo "<a class='nav-link text-white' href='areaCliente.php'>Logado como <b>$logado</b></a>"; ?>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-white" href="deslogarConta.php">Sair</a>
@@ -101,58 +129,72 @@
                 <main class="flex-fill">
                     <div class="container">
                         <h1>Carrinho de Compras</h1>
-                        <ul class="list-group mb-3">
-                            <li class="list-group-item py-3">
-                                <div class="row g-3">
-                                    <div class="col-4 col-md-3 col-lg-2">
-                                        <a href="#">
-                                            <img src="../img/IMAGENS INSIDE/Camiseta time/Camise time PSG.jpg" class="img-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="col-8 col-md-9 col-lg-7 col-xl-8 text-left aling-self-center">
-                                        <h4>
-                                            <b>
-                                                <a href="#" class="text-decoration-none text-Amarelo">Camisa Paris Saint Germant</a>
-                                            </b>
-                                        </h4>
-                                        <h5>Camisa oficial do paris saint germant, camisa s/ numero com patrocinio.</h5>
-                                    </div>
-                                    <div class="col-6 offset-6 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-3 offset-lg-0 col-xl-2 aling-self-center mt-3">
-                                        <div class="input-group">
-                                            <button class="btn btn-outline-dark btn-sm" type="button" id="buttonRemove">
-                                                <i class="bi-caret-down" id="buttonRemove" style="font-size: 16px; line-height: 16px; color: #f7cb15;"></i>
-                                            </button>
-                                            <input
-                                                type="text"
-                                                class="form-control text-center border-dark"
-                                                id="qntdCarrinho"
-                                                value="1"
-                                            >
-                                            <button class="btn btn-outline-dark btn-sm" type="button" id="buttonAdd">
-                                                <i class="bi-caret-up" id="buttonAdd" style="font-size: 16px; line-height: 16px; color: #f7cb15;"></i>
-                                            </button>
-                                            <button class="btn btn-outline-danger border-dark btn-sm" type="button">
-                                                <i class="bi-trash" style="font-size: 16px; line-height: 16px;"></i>
-                                            </button>
-                                        </div>
-                                        <div class="text-end mt-2">
-                                            <samll class="text-secondary">Ate 12x s/ juros.</samll><br>
-                                            <span class="text-dark">Valor item: R$ 250,00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item py-3">
-                                <div class="text-end">
-                                    <h4 class="text-dark mb-3">
-                                        Valor Total: R$ 250,00
-                                    </h4>
-                                    <a href="home.php" class="btn btn-outline-success btn-lg">Continuar Comprando</a>
-                                    <a href="fechamentoItens.php" class="btn btn-Amarelo btn-lg ms-2 mt-xs-3">Finalizar Compra</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                            <?php foreach (
+                                $_SESSION['carrinho_final']
+                                as $idProdutoCarrinhoAtualizado
+                            ) {
+                                $exibir_carrinho = "SELECT * FROM tenis WHERE idTenis = '$idProdutoCarrinhoAtualizado'";
+                                $result = $conexao->query($exibir_carrinho);
+                                $carrinho_data = mysqli_fetch_assoc($result);
+                                echo "
+                                    <ul class='list-group mb-3'>
+                                                    <li class='list-group-item py-3'>
+                                                    <div class='row g-3'>
+                                                    <div class='col-4 col-md-3 col-lg-2'>
+                                                    <a href='#'>
+                                                        <img src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg' class='img-thumbnail'>
+                                                    </a>
+                                                </div>
+                                                <div class='col-8 col-md-9 col-lg-7 col-xl-8 text-left aling-self-center'>
+                                                <h4>
+                                                    <b>
+                                                    <a href='#' class='text-decoration-none text-Amarelo'>" .
+                                    $carrinho_data['modeloTenis'] .
+                                    "</a>
+                                                    </b>
+                                                </h4>
+                                                <h5>" .
+                                    $carrinho_data['detalhesTenis'] .
+                                    "</h5>
+                                                </div>
+                                                <div class='col-6 offset-6 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-3 offset-lg-0 col-xl-2 aling-self-center mt-3'>
+                                                    <div class='input-group'>
+                                                        <button class='btn btn-outline-dark btn-sm' type='button' id='".$carrinho_data['idTenis']."buttonRemove' onclick='removeItens(this.id)'>
+                                                            <i class='bi-caret-down' id='".$carrinho_data['idTenis']."buttonRemove' style='font-size: 16px; line-height: 16px; color: #f7cb15;' onclick='removeItens(this.id)'></i>
+                                                        </button>
+                                                        <input
+                                                            type='text'
+                                                            class='form-control text-center border-dark'
+                                                            id='".$carrinho_data['idTenis']."qntdCarrinho'
+                                                            value='1'
+                                                        >
+                                                        <button class='btn btn-outline-dark btn-sm' type='button' id='".$carrinho_data['idTenis']."buttonAdd' onclick='addItens(this.id)'>
+                                                            <i class='bi-caret-up' id='".$carrinho_data['idTenis']."buttonAdd' style='font-size: 16px; line-height: 16px; color: #f7cb15;' onclick='addItens(this.id)'></i>
+                                                        </button>
+                                                        <button class='btn btn-outline-danger border-dark btn-sm' type='button'  id='".$carrinho_data['idTenis']."buttonTrash'>
+                                                            <i id='".$carrinho_data['idTenis']."buttonTrash' class='bi-trash' style='font-size: 16px; line-height: 16px;'></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class='text-end mt-2'>
+                                                        <samll class='text-secondary'>Ate 12x s/ juros.</samll><br>
+                                                        <span class='text-dark'>Valor item: R$ 160,00</span>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                </li>";
+                            } 
+                            echo "<li class='list-group-item py-3'>
+                            <div class='text-end'>
+                                <h4 class='text-dark mb-3'>
+                            Valor Total: R$ ".$valor_total."
+                        </h4>
+                        <a href='home.php' class='btn btn-outline-success btn-lg'>Continuar Comprando</a>
+                        <a href='fechamentoItens.php' class='btn btn-Amarelo btn-lg ms-2 mt-xs-3'>Finalizar Compra</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>"
+            ?>
                 </main>
                 <footer class="border-top text-muted">
                     <div class="bg-dark">

@@ -1,35 +1,29 @@
-function buscarProdutoPagHome(nome)
+function buscarNomeProduto(nomeProduto)
 {
-    $.ajax
-    (
+    $.ajax({
+        url: "buscarProduto.php",
+        method: "POST",
+        data: {nomeProduto: nomeProduto},
+        success: function(data)
         {
-            url: "buscarProduto.php",
-            method: "POST",
-            data: {nome:nome},
-            success: function(data)
-            {
-                $('#resultado').html(data);
-            }
+            $('#resultado').html(data);
         }
-    );
-};
+    });
+}
 
 $(document).ready(function()
 {
-    buscarProdutoPagHome();
-    $('#buttonBuscarHome').click(function()
+    buscarNomeProduto();
+    $('#buscaProduto').keyup(function(){
+        var nomeProduto = $('#buscaProduto').val();
+        console.log(nomeProduto);
+        if(nomeProduto != '')
         {
-            var nome = $('#buscaProduto').val();
-
-            if(nome != ' ')
-            {
-                buscarProdutoPagHome(nome);
-            }
-            else
-            {
-                buscarProdutoPagHome();
-            }
+            buscarNomeProduto(nomeProduto);
         }
-    )
-}
-);
+        else
+        {
+            buscarNomeProduto();
+        }
+    })
+});

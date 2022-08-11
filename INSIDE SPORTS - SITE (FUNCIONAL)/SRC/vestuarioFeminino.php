@@ -126,8 +126,8 @@
                             <div class="col-12 col-md-5">
                                 <form class="justify-content-center justify-content-md-start mb-3 mb-md-0">
                                     <div class="input-group input-group-sm">
-                                        <input type="text" class="form-control me-2" name="buscaProduto" id="buscaProduto" placeholder="Digite aqui o que voce procura">
-                                        <button class="btn btn-Amarelo">Buscar</button>
+                                    <input type="text" class="form-control me-2" name="buscaProduto" id="buscaProduto" placeholder="Digite aqui o que voce procura">
+                                        <button class="btn btn-Amarelo" id="buttonBuscarHome" name="buttonBuscarHome" onclick='buscarNomeProduto()'>Buscar</button>
                                     </div>
                                 </form>
                             </div>
@@ -168,84 +168,9 @@
         
                         <hr mt-3>
         
-                        <div class="row g-3">
+                        <h2>Vestuario Feminino</h2>
+                        <div class="row g-3" id="resultado">
                             <h2>Vestuario Feminino</h2>
-                            <?php
-                            $tenis_data = mysqli_num_rows($result_tenis);
-                            if($tenis_data < 12)
-                            {
-                                while($tenis_data = mysqli_fetch_assoc($result_tenis)) {
-                                    echo "<div class='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-                                        <div class='card text-center bg-light'>
-                                            <a href='#' class='position-absolute end-0 p-2 text-Amarelo'>
-                                                <i class='bi-suit-heart' style='font-size: 24px; line-height: 24px;'></i>
-                                            </a>";
-                                            echo "<img
-                                                src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg'
-                                                id=".$tenis_data['idTenis']."
-                                                class='card-img-top'
-                                                alt='...'
-                                                onmouseout='trocaImgOut(".$tenis_data['idTenis'].")'
-                                                onmouseenter='trocaImgEnter(".$tenis_data['idTenis'].")'
-                                                onclick='trocaImgEnter(".$tenis_data['idTenis'].")'
-                                                >";
-                                            echo "<div class='card-header'>
-                                                R$ 160,00
-                                                </div>";
-                                            echo "<div class='card-body'>";
-                                                echo "<h5 class='card-title'>".$tenis_data['modeloTenis']."</h5>";
-                                                echo "<p class='card-text truncar-3l'>".$tenis_data['detalhesTenis']."</p>";
-                                            echo "</div>";
-                                            echo "<div class='card-footer'>
-                                                <a href='cart.php' class='btn btn-Amarelo mt-2 d-block'>Adicionar ao Carrinho</a>
-                                                <small class='text-success'>32 unidades em estoque</small>
-                                            </div>
-                                        </div>
-                                    </div>";
-                                }
-                            }
-                            else
-                            {
-                                $numMaxTelaInicial = 0;
-                                while($tenis_data = mysqli_fetch_assoc($result_tenis)) {
-                                    if($numMaxTelaInicial < 12)
-                                    {
-                                        $numMaxTelaInicial = $numMaxTelaInicial + 1;
-                                        echo "<div class='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-                                        <div class='card text-center bg-light'>
-                                            <a href='#' class='position-absolute end-0 p-2 text-Amarelo'>
-                                                <i class='bi-suit-heart' style='font-size: 24px; line-height: 24px;'></i>
-                                            </a>";
-                                            echo "<img
-                                                src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg'
-                                                id=".$tenis_data['idTenis']."
-                                                class='card-img-top'
-                                                alt='...'
-                                                onmouseout='trocaImgOut(".$tenis_data['idTenis'].")'
-                                                onmouseenter='trocaImgEnter(".$tenis_data['idTenis'].")'
-                                                onclick='trocaImgEnter(".$tenis_data['idTenis'].")'
-                                                >";
-                                            echo "<div class='card-header'>
-                                                R$ 160,00
-                                                </div>";
-                                            echo "<div class='card-body'>";
-                                                echo "<h5 class='card-title'>".$tenis_data['modeloTenis']."</h5>";
-                                                echo "<p class='card-text truncar-3l'>".$tenis_data['detalhesTenis']."</p>";
-                                            echo "</div>";
-                                            echo "<div class='card-footer'>
-                                                <a href='cart.php' class='btn btn-Amarelo mt-2 d-block'>Adicionar ao Carrinho</a>
-                                                <small class='text-success'>32 unidades em estoque</small>
-                                            </div>
-                                            </div>
-                                        </div>";
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-                            }
-                            ?>
                         </div>
         
                         <hr class="mt-3">
@@ -342,7 +267,9 @@
                 </footer>
             </div>
             <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
             <script src="../javascript/index.js" charset="utf-8"></script>
+            <script src="../javascript/ajaxIndex.js" charset="utf-8"></script>
             <script src="../javascript/jqueryIndex.js" charset="utf-8"></script>
         </body>
     </html>

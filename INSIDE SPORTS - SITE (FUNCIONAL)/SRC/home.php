@@ -17,7 +17,7 @@
     $user_data = mysqli_fetch_assoc($result);
     $logado = $user_data['nome'];
 
-    $sql_tenis = "SELECT * FROM tenis ORDER BY idTenis";
+    $sql_tenis = "SELECT * FROM tenis ORDER BY idTenis DESC LIMIT 6";
     $result_tenis = $conexao->query($sql_tenis);
 ?>
 <!doctype html>
@@ -27,6 +27,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../css/styles.css">
         <link rel="shortcut icon" href="../icone/favicon.ico">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -117,7 +118,7 @@
                                     <span class="badge rounded-pill bg-light text-dark position-absolute ms-4 mt-0" titel="0 Produtos no Carrinho">
                                         <small>0</small>
                                     </span>
-                                    <a href="cart.php" class="nav-link text-white">
+                                    <a href="cart.php?idProduto=".$tenis_data['idTenis']."" class="nav-link text-white">
                                         <i class="bi-cart" style="font-size:24px; line-height: 24px;"></i>
                                     </a>
                                 </li>
@@ -178,8 +179,8 @@
                             <div class="col-12">
                                 <form class="justify-content-center justify-content-md-start mb-3 mb-md-0">
                                     <div class="input-group input-group-sm">
-                                        <input type="text" class="form-control me-2" name="buscaProduto" id="buscaProduto" placeholder="Digite aqui o que voce procura">
-                                        <button class="btn btn-Amarelo" id="buttonBuscarHome">Buscar</button>
+                                    <input type="text" class="form-control me-2" name="buscaProduto" id="buscaProduto" placeholder="Digite aqui o que voce procura">
+                                        <button class="btn btn-Amarelo" id="buttonBuscarHome" name="buttonBuscarHome" onclick='buscarNomeProduto()'>Buscar</button>
                                     </div>
                                 </form>
                             </div>
@@ -187,86 +188,37 @@
                         <hr class="mt-3">
                         <div class="row g-3">
                             <h6>Produtos Masculinos</h6>
-                            <div id="resultado">
-                                <p>RESULTADO BUSCA:</p>
-                            </div>
-                            <br>
-                            <hr>
-                            <br>
                             <?php
-                            $tenis_data = mysqli_num_rows($result_tenis);
-                            if($tenis_data < 6)
-                            {
-                                while($tenis_data = mysqli_fetch_assoc($result_tenis)) {
-                                    $idProdMasc = "_".$tenis_data['idTenis']."PM";
+                            $numMaxTelaInicial = 0;
+                            while($tenis_data = mysqli_fetch_assoc($result_tenis)) {
+                                    $idProdMasc = "PM".$tenis_data['idTenis'];
+                                    $numMaxTelaInicial = $numMaxTelaInicial + 1;
                                     echo "<div class='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-                                        <div class='card text-center bg-light'>
-                                            <a href='#' class='position-absolute end-0 p-2 text-Amarelo'>
-                                                <i class='bi-suit-heart' style='font-size: 24px; line-height: 24px;'></i>
-                                            </a>";
-                                            echo "<img
-                                                src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg'
-                                                id=".$idProdMasc."
-                                                class='card-img-top'
-                                                alt='...'
-                                                onmouseout='trocaImgOut(".$idProdMasc.")'
-                                                onmouseenter='trocaImgEnter(".$idProdMasc.")'
-                                                >";
-                                            echo "<div class='card-header'>
-                                                R$ 160,00
-                                                </div>";
-                                            echo "<div class='card-body'>";
-                                                echo "<h5 class='card-title'>".$tenis_data['modeloTenis']."</h5>";
-                                                echo "<p class='card-text truncar-3l'>".$tenis_data['detalhesTenis']."</p>";
-                                            echo "</div>";
-                                            echo "<div class='card-footer'>
-                                                <a href='cart.php' class='btn btn-Amarelo mt-2 d-block'>Adicionar ao Carrinho</a>
-                                                <small class='text-success'>32 unidades em estoque</small>
-                                            </div>
+                                    <div class='card text-center bg-light'>
+                                        <a href='#' class='position-absolute end-0 p-2 text-Amarelo'>
+                                            <i class='bi-suit-heart' style='font-size: 24px; line-height: 24px;'></i>
+                                        </a>";
+                                        echo "<img
+                                            src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg'
+                                            id=".$idProdMasc."
+                                            class='card-img-top'
+                                            alt='...'
+                                            onmouseout=\"trocaImgOut('".$idProdMasc."')\"
+                                            onmouseenter=\"trocaImgEnter('".$idProdMasc."')\"
+                                            >";
+                                        echo "<div class='card-header'>
+                                            R$ 160,00
+                                            </div>";
+                                        echo "<div class='card-body'>";
+                                            echo "<h5 class='card-title'>".$tenis_data['modeloTenis']."</h5>";
+                                            echo "<p class='card-text truncar-3l'>".$tenis_data['detalhesTenis']."</p>";
+                                        echo "</div>";
+                                        echo "<div class='card-footer'>
+                                            <a href='cart.php?idProduto=".$tenis_data['idTenis']."?idProduto=".$tenis_data['idTenis']."' class='btn btn-Amarelo mt-2 d-block'>Adicionar ao Carrinho</a>
+                                            <small class='text-success'>32 unidades em estoque</small>
+                                        </div>
                                         </div>
                                     </div>";
-                                }
-                            }
-                            else
-                            {
-                                $numMaxTelaInicial = 0;
-                                while($tenis_data = mysqli_fetch_assoc($result_tenis)) {
-                                    if($numMaxTelaInicial < 6)
-                                    {
-                                        $idProdMasc = "_".$tenis_data['idTenis']."PM";
-                                        $numMaxTelaInicial = $numMaxTelaInicial + 1;
-                                        echo "<div class='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-                                        <div class='card text-center bg-light'>
-                                            <a href='#' class='position-absolute end-0 p-2 text-Amarelo'>
-                                                <i class='bi-suit-heart' style='font-size: 24px; line-height: 24px;'></i>
-                                            </a>";
-                                            echo "<img
-                                                src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg'
-                                                id=".$idProdMasc."
-                                                class='card-img-top'
-                                                alt='...'
-                                                onmouseout='trocaImgOut(".$idProdMasc.")'
-                                                onmouseenter='trocaImgEnter(".$idProdMasc.")'
-                                                >";
-                                            echo "<div class='card-header'>
-                                                R$ 160,00
-                                                </div>";
-                                            echo "<div class='card-body'>";
-                                                echo "<h5 class='card-title'>".$tenis_data['modeloTenis']."</h5>";
-                                                echo "<p class='card-text truncar-3l'>".$tenis_data['detalhesTenis']."</p>";
-                                            echo "</div>";
-                                            echo "<div class='card-footer'>
-                                                <a href='cart.php' class='btn btn-Amarelo mt-2 d-block'>Adicionar ao Carrinho</a>
-                                                <small class='text-success'>32 unidades em estoque</small>
-                                            </div>
-                                            </div>
-                                        </div>";
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
                             }
                             ?>
                             <hr class="mt-3">
@@ -274,81 +226,39 @@
                         <div class="row g-3">
                             <h6>Produtos Femininos</h6>
                             <?php
-                            $sql_tenis = "SELECT * FROM tenis ORDER BY idTenis DESC";
+                            $sql_tenis = "SELECT * FROM tenis ORDER BY idTenis DESC LIMIT 6";
                             $result_tenis = $conexao->query($sql_tenis);
                             $tenis_data = mysqli_num_rows($result_tenis);
-                            if($tenis_data < 6)
-                            {
-                                while($tenis_data = mysqli_fetch_assoc($result_tenis)) {
-                                    $idProdFem = "_".$tenis_data['idTenis']."PF";
+                            $numMaxTelaInicial = 0;
+                            while($tenis_data = mysqli_fetch_assoc($result_tenis)) {
+                                    $idProdMasc = "PF".$tenis_data['idTenis'];
+                                    $numMaxTelaInicial = $numMaxTelaInicial + 1;
                                     echo "<div class='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-                                        <div class='card text-center bg-light'>
-                                            <a href='#' class='position-absolute end-0 p-2 text-Amarelo'>
-                                                <i class='bi-suit-heart' style='font-size: 24px; line-height: 24px;'></i>
-                                            </a>";
-                                            echo "<img
-                                                src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg'
-                                                id='".$idProdFem."'
-                                                class='card-img-top'
-                                                alt='...'
-                                                onmouseout='trocaImgOut(".$idProdFem.")'
-                                                onmouseenter='trocaImgEnter(".$idProdFem.")'
-                                                >";
-                                            echo "<div class='card-header'>
-                                                R$ 160,00
-                                                </div>";
-                                            echo "<div class='card-body'>";
-                                                echo "<h5 class='card-title'>".$tenis_data['modeloTenis']."</h5>";
-                                                echo "<p class='card-text truncar-3l'>".$tenis_data['detalhesTenis']."</p>";
-                                            echo "</div>";
-                                            echo "<div class='card-footer'>
-                                                <a href='cart.php' class='btn btn-Amarelo mt-2 d-block'>Adicionar ao Carrinho</a>
-                                                <small class='text-success'>32 unidades em estoque</small>
-                                            </div>
+                                    <div class='card text-center bg-light'>
+                                        <a href='#' class='position-absolute end-0 p-2 text-Amarelo'>
+                                            <i class='bi-suit-heart' style='font-size: 24px; line-height: 24px;'></i>
+                                        </a>";
+                                        echo "<img
+                                            src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg'
+                                            id=".$idProdMasc."
+                                            class='card-img-top'
+                                            alt='...'
+                                            onmouseout=\"trocaImgOut('".$idProdMasc."')\"
+                                            onmouseenter=\"trocaImgEnter('".$idProdMasc."')\"
+                                            >";
+                                        echo "<div class='card-header'>
+                                            R$ 160,00
+                                            </div>";
+                                        echo "<div class='card-body'>";
+                                            echo "<h5 class='card-title'>".$tenis_data['modeloTenis']."</h5>";
+                                            echo "<p class='card-text truncar-3l'>".$tenis_data['detalhesTenis']."</p>";
+                                        echo "</div>";
+                                        echo "<div class='card-footer'>
+                                            <a href='cart.php?idProduto=".$tenis_data['idTenis']."' class='btn btn-Amarelo mt-2 d-block'>Adicionar ao Carrinho</a>
+                                            <small class='text-success'>32 unidades em estoque</small>
+                                        </div>
                                         </div>
                                     </div>";
-                                }
-                            }
-                            else
-                            {
-                                $numMaxTelaInicial = 0;
-                                while($tenis_data = mysqli_fetch_assoc($result_tenis)) {
-                                    if($numMaxTelaInicial < 6)
-                                    {
-                                        $idProdFem = "_".$tenis_data['idTenis']."PF";
-                                        $numMaxTelaInicial = $numMaxTelaInicial + 1;
-                                        echo "<div class='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-                                        <div class='card text-center bg-light'>
-                                            <a href='#' class='position-absolute end-0 p-2 text-Amarelo'>
-                                                <i class='bi-suit-heart' style='font-size: 24px; line-height: 24px;'></i>
-                                            </a>";
-                                            echo "<img
-                                                src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg'
-                                                id='".$idProdFem."'
-                                                class='card-img-top'
-                                                alt='...'
-                                                onmouseout='trocaImgOut(".$idProdFem.")'
-                                                onmouseenter='trocaImgEnter(".$idProdFem.")'
-                                                >";
-                                            echo "<div class='card-header'>
-                                                R$ 160,00
-                                                </div>";
-                                            echo "<div class='card-body'>";
-                                                echo "<h5 class='card-title'>".$tenis_data['modeloTenis']."</h5>";
-                                                echo "<p class='card-text truncar-3l'>".$tenis_data['detalhesTenis']."</p>";
-                                            echo "</div>";
-                                            echo "<div class='card-footer'>
-                                                <a href='cart.php' class='btn btn-Amarelo mt-2 d-block'>Adicionar ao Carrinho</a>
-                                                <small class='text-success'>32 unidades em estoque</small>
-                                            </div>
-                                            </div>
-                                        </div>";
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
                             }
                             ?>
                             <hr class="mt-3">
@@ -356,81 +266,39 @@
                         <div class="row g-3 mb-3">
                             <h6>Tenis</h6>
                             <?php
-                            $sql_tenis = "SELECT * FROM tenis ORDER BY idTenis DESC";
+                            $sql_tenis = "SELECT * FROM tenis ORDER BY idTenis DESC LIMIT 6";
                             $result_tenis = $conexao->query($sql_tenis);
                             $tenis_data = mysqli_num_rows($result_tenis);
-                            if($tenis_data < 6)
-                            {
-                                while($tenis_data = mysqli_fetch_assoc($result_tenis)) {
-                                    $idProdTenis = "_".$tenis_data['idTenis']."PT";
+                            $numMaxTelaInicial = 0;
+                            while($tenis_data = mysqli_fetch_assoc($result_tenis)) {
+                                    $idProdMasc = "TN".$tenis_data['idTenis'];
+                                    $numMaxTelaInicial = $numMaxTelaInicial + 1;
                                     echo "<div class='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-                                        <div class='card text-center bg-light'>
-                                            <a href='#' class='position-absolute end-0 p-2 text-Amarelo'>
-                                                <i class='bi-suit-heart' style='font-size: 24px; line-height: 24px;'></i>
-                                            </a>";
-                                            echo "<img
-                                                src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg'
-                                                id='".$idProdTenis."'
-                                                class='card-img-top'
-                                                alt='...'
-                                                onmouseout='trocaImgOut(".$idProdTenis.")'
-                                                onmouseenter='trocaImgEnter(".$idProdTenis.")'
-                                                >";
-                                            echo "<div class='card-header'>
-                                                R$ 160,00
-                                                </div>";
-                                            echo "<div class='card-body'>";
-                                                echo "<h5 class='card-title'>".$tenis_data['modeloTenis']."</h5>";
-                                                echo "<p class='card-text truncar-3l'>".$tenis_data['detalhesTenis']."</p>";
-                                            echo "</div>";
-                                            echo "<div class='card-footer'>
-                                                <a href='cart.php' class='btn btn-Amarelo mt-2 d-block'>Adicionar ao Carrinho</a>
-                                                <small class='text-success'>32 unidades em estoque</small>
-                                            </div>
+                                    <div class='card text-center bg-light'>
+                                        <a href='#' class='position-absolute end-0 p-2 text-Amarelo'>
+                                            <i class='bi-suit-heart' style='font-size: 24px; line-height: 24px;'></i>
+                                        </a>";
+                                        echo "<img
+                                            src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg'
+                                            id=".$idProdMasc."
+                                            class='card-img-top'
+                                            alt='...'
+                                            onmouseout=\"trocaImgOut('".$idProdMasc."')\"
+                                            onmouseenter=\"trocaImgEnter('".$idProdMasc."')\"
+                                            >";
+                                        echo "<div class='card-header'>
+                                            R$ 160,00
+                                            </div>";
+                                        echo "<div class='card-body'>";
+                                            echo "<h5 class='card-title'>".$tenis_data['modeloTenis']."</h5>";
+                                            echo "<p class='card-text truncar-3l'>".$tenis_data['detalhesTenis']."</p>";
+                                        echo "</div>";
+                                        echo "<div class='card-footer'>
+                                            <a href='cart.php?idProduto=".$tenis_data['idTenis']."' class='btn btn-Amarelo mt-2 d-block'>Adicionar ao Carrinho</a>
+                                            <small class='text-success'>32 unidades em estoque</small>
+                                        </div>
                                         </div>
                                     </div>";
-                                }
-                            }
-                            else
-                            {
-                                $numMaxTelaInicial = 0;
-                                while($tenis_data = mysqli_fetch_assoc($result_tenis)) {
-                                    if($numMaxTelaInicial < 6)
-                                    {
-                                        $idProdTenis = "_".$tenis_data['idTenis']."PT";
-                                        $numMaxTelaInicial = $numMaxTelaInicial + 1;
-                                        echo "<div class='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-                                        <div class='card text-center bg-light'>
-                                            <a href='#' class='position-absolute end-0 p-2 text-Amarelo'>
-                                                <i class='bi-suit-heart' style='font-size: 24px; line-height: 24px;'></i>
-                                            </a>";
-                                            echo "<img
-                                                src='../img/IMAGENS INSIDE/Chuteira masculina/Chuteira masculina 1.jpg'
-                                                id='".$idProdTenis."'
-                                                class='card-img-top'
-                                                alt='...'
-                                                onmouseout='trocaImgOut(".$idProdTenis.")'
-                                                onmouseenter='trocaImgEnter(".$idProdTenis.")'
-                                                >";
-                                            echo "<div class='card-header'>
-                                                R$ 160,00
-                                                </div>";
-                                            echo "<div class='card-body'>";
-                                                echo "<h5 class='card-title'>".$tenis_data['modeloTenis']."</h5>";
-                                                echo "<p class='card-text truncar-3l'>".$tenis_data['detalhesTenis']."</p>";
-                                            echo "</div>";
-                                            echo "<div class='card-footer'>
-                                                <a href='cart.php' class='btn btn-Amarelo mt-2 d-block'>Adicionar ao Carrinho</a>
-                                                <small class='text-success'>32 unidades em estoque</small>
-                                            </div>
-                                            </div>
-                                        </div>";
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
                             }
                             ?>
                             <br>
@@ -494,7 +362,7 @@
             <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
             <script src="../javascript/index.js" charset="utf-8"></script>
-            <script src="../javascript/jqueryIndex.js" charset="utf-8"></script>
             <script src="../javascript/ajaxIndex.js" charset="utf-8"></script>
+            <script src="../javascript/jqueryIndex.js" charset="utf-8"></script>
         </body>
     </html>
